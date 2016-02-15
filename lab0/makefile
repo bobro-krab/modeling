@@ -1,4 +1,4 @@
-COMPILER=clang++
+COMPILER=g++
 CFLAGS=-g -Wall -lncurses -lm -lpthread
 SOURSES=main.cpp
 OBJECTS=$(SOURSES:.cpp=.o)
