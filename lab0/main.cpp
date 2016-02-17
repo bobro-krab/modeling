@@ -4,7 +4,7 @@
 #include <iostream>
 #include <random>
 
-enum some {n=1000000, intervalCount=10000};
+enum some {n=1000000, intervalCount=10000, tau_diap=1000};
 
 // Random function to be tested
 float random_standart()
@@ -42,12 +42,8 @@ int standart_test( float(*random)())
         V += (float)(intervals[i] * intervals[i]) / (float)intervalLength;
     }
 
-    // for (int i = 0; i < intervalCount; ++i){
-    //     printf("%d\n ", intervals[i]);
-    // }
-
     V = V / (float)n - (float)n;
-    printf("UEEE %lf\n", V);
+    printf("Chi-square %lf\n", V);
 
     // Autocorelation
     float average = 0;    // math exception
@@ -60,25 +56,27 @@ int standart_test( float(*random)())
     dispersion /= n;
 
     int tau = 0;
-    for (tau = 0; tau < 1000; ++tau){
+    float summ = 0.0;
+    for (tau = 0; tau < tau_diap; ++tau) {
         float S = 0.0;
         for (int i = 0; i < n; ++i){
             S = S + numbers[i] * numbers[(i + tau) % n];
         }
         S /= n - tau;
         float corr = S + average * average / (dispersion * dispersion);
-        printf("Tau: %d Corr: %f\n", tau, corr);
+        summ += corr;
     }
+    summ /= tau_diap;
+    printf("Autocorrelation: %f\n", summ);
 
     return 0;
 }
 
-int main(int argc, char *argv[])
+int main()
 {
+    printf("Builtin random: \n");
     standart_test(random_uniform);
+    printf("Uniform distribution: \n");
     standart_test(random_standart);
-    // for (int i = 0; i < 100; ++i){
-    //     printf("%lf\n", random_uniform());
-    // }
     return 0;
 }
