@@ -12,10 +12,12 @@ float random_standart()
     return (float)rand() / (float)RAND_MAX;
 }
 
+std::random_device                  rand_dev;
+std::mt19937                        generator(rand_dev());
+std::uniform_real_distribution<float> distribution(0.0,1.0);
+
 float random_uniform()
 {
-    std::default_random_engine generator;
-    std::uniform_real_distribution<float> distribution(0.0,1.0);
     return distribution(generator);
 }
 
@@ -73,7 +75,10 @@ int standart_test( float(*random)())
 
 int main(int argc, char *argv[])
 {
-    standart_test(random_standart);
     standart_test(random_uniform);
+    standart_test(random_standart);
+    // for (int i = 0; i < 100; ++i){
+    //     printf("%lf\n", random_uniform());
+    // }
     return 0;
 }
