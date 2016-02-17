@@ -4,7 +4,20 @@
 
 enum some {n=1000000, intervalCount=10000};
 
-int main(int argc, char *argv[])
+// Random function to be tested
+float random_standart()
+{
+    return (float)rand() / (float)RAND_MAX;
+}
+
+float random_uniform()
+{
+    return 0.5;
+}
+
+// Calculate chi-square and autocorrelation
+// for given random() function
+int standart_test( float(*random)())
 {
     srand(time(NULL));
     float numbers[n] = {0};
@@ -13,7 +26,7 @@ int main(int argc, char *argv[])
     float intervalLength = (float) intervalCount / (float) n;
 
     for (int i = 0; i < n; ++i){
-        currentNumber = (float)((float)rand() / (float)RAND_MAX);
+        currentNumber = random();
         intervals[(int)(currentNumber / intervalLength)] += 1;
         numbers[i] = currentNumber;
     }
@@ -51,5 +64,12 @@ int main(int argc, char *argv[])
         printf("Tau: %d Corr: %f\n", tau, corr);
     }
 
+    return 0;
+}
+
+int main(int argc, char *argv[])
+{
+    standart_test(random_standart);
+    standart_test(random_uniform);
     return 0;
 }
