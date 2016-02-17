@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <iostream>
+#include <random>
 
 enum some {n=1000000, intervalCount=10000};
 
@@ -12,7 +14,9 @@ float random_standart()
 
 float random_uniform()
 {
-    return 0.5;
+    std::default_random_engine generator;
+    std::uniform_real_distribution<float> distribution(0.0,1.0);
+    return distribution(generator);
 }
 
 // Calculate chi-square and autocorrelation
