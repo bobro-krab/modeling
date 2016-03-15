@@ -7,7 +7,6 @@ using namespace std;
 
 enum some {n=1000000, intervalCount=10000, tau_diap=1000};
 
-// Random function to be tested
 float random_standart()
 {
     return (float)rand() / (float)RAND_MAX;
@@ -24,13 +23,11 @@ float random_distributed()
 }
 
 
-// Calculate chi-square and autocorrelation
 int main()
 {
 
     int histogram[180] = {0};
     for (int i = 0; i < 10000; ++i){
-        // cout << random_distributed() << endl;
         histogram[(int)(random_distributed() * 100)] += 1;
     }
 
