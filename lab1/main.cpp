@@ -34,7 +34,7 @@ int main()
         histogram[(int)(random_distributed() * 100)] += 1;
     }
 
-    for (int i = 0; i < 150; ++i){
+    for (int i = 0; i < 180; ++i){
         cout << histogram[i] << endl;
     }
     return 0;
