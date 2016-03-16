@@ -10,10 +10,6 @@ float random_standart()
     return (float)rand() / (float)RAND_MAX;
 }
 
-float function(float a, float x) {
-    return  std::sin(x) * a;
-}
-
 float random_distributed()
 {
         float rand = random_standart();
