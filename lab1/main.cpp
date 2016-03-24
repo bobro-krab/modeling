@@ -18,6 +18,33 @@ int random_int(int max)
     return (int)((float)random_standart() * (float)max);
 }
 
+class random_with_returns
+{
+    private:
+        vector<pair<int, float> > distrubution;
+    public:
+        random_with_returns(vector<pair<int, float> > input) {
+            distrubution = input;
+            for (unsigned long i = 1; i <  distrubution.size(); ++i){
+                distrubution[i].second += distrubution[i-1].second;
+            }
+        }
+        void print_distribution() {
+            for (unsigned long i = 0; i <  distrubution.size(); ++i){
+                cout << distrubution[i].first << " " << distrubution[i].second << endl;
+            }
+        }
+
+        int random() {
+            float random_number = random_standart();
+            int index = 0;
+            while(random_number > distrubution[index].second) {
+                index++;
+            }
+            return distrubution[index].first;
+        }
+};
+
 class random_withot_returns
 {
 private:
@@ -62,16 +89,41 @@ float random_distributed()
 int main(int argc, char **argv)
 {
     srand(time(NULL));
-    // int item_count = 10000;
-    // if (argc > 1) {
-    //     item_count = atoi(argv[1]);
-    // }
+    int item_count = 10000;
+    if (argc > 1) {
+        item_count = atoi(argv[1]);
+    }
 
-    class random_withot_returns r;
-    for (int i = 0; i < 10; ++i){
-        cout << r.random()<<endl;
+    vector<pair<int, float> > distrubution;
+    int line_count;
+    // cin >> line_count;
+    scanf("%d", &line_count);
+    fflush(stdout);
+    cout << "Line count is " << line_count << endl;
+
+    distrubution.resize(line_count);
+    for (int i = 0; i < line_count; ++i){
+        int digit;
+        float chance;
+        cin >> digit >> chance;
+        distrubution[i] = pair<int, float>(digit, chance);
+    }
+
+    class random_with_returns returned(distrubution);
+    returned.print_distribution();
+    int stat[4] = {0};
+
+    for (int i = 0; i < 10000; ++i){
+        // cout << returned.random()<<endl;
+        stat[returned.random()]++;
         // cout << random_int(100) << endl;
     }
+
+    for (int i = 1; i < 4; ++i){
+        cout << stat[i] << endl;
+    }
+
+
 
     // int histogram[array_size] = {0};
     // for (int i = 0; i < item_count; ++i){
