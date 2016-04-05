@@ -24,12 +24,12 @@ end
 p "degrees:"
 p  vericle_degrees
 
-# while vericle_degrees.size > 1
-#     random_index = Random.rand(vericle_degrees.size)
-#     vericle_degrees[random_index] -= 1
-#     random_verticle = Random.rand(verticle_count)
-#     addVerticlesToGraph(list, random_index, random_verticle)
-# end
+# select random verticle
+# add to allowed its neighborg
+
+# select random verticle from allowed
+# remove merged verticles from allowed
+# add newly linked verticles to allowed
 
 printGraph list
 
