@@ -10,28 +10,26 @@ end
 
 def printGraph list
     p "list"
-    i = 1
+    verticle_index = 1
     list.each do |l|
-        print(i, " ", l, "\n")
-        i+=1
+        print(verticle_index, " ", l, "\n")
+        verticle_index+=1
     end
 end
 
-vericle_degrees =%w[]
+vericle_degrees = {}
 1.upto(verticle_count) do |e|
-    vericle_degrees.insert(0,  Random.rand(max_degeee) + 1)
+    vericle_degrees[e] =  Random.rand(max_degeee) + 1
 end
 p "degrees:"
 p  vericle_degrees
-vericle_degrees.delete(2)
 
-while vericle_degrees.size > 1
-    random_index = Random.rand(vericle_degrees.size)
-    vericle_degrees[random_index] -= 1
-    random_verticle = Random.rand(verticle_count)
-    addVerticlesToGraph(list, random_index, random_verticle)
-    vericle_degrees.delete(0)
-end
+# while vericle_degrees.size > 1
+#     random_index = Random.rand(vericle_degrees.size)
+#     vericle_degrees[random_index] -= 1
+#     random_verticle = Random.rand(verticle_count)
+#     addVerticlesToGraph(list, random_index, random_verticle)
+# end
 
 printGraph list
 
