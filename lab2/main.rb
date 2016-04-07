@@ -10,7 +10,7 @@ class Pair
     end
 end
 
-def traverse current, parent, depth = 0
+def traverse current, parent = nil, depth = 0
     1.upto(depth) do
         printf "  "
     end
@@ -54,7 +54,7 @@ def randomGraph verticle_count, max_degeee
     return start
 end
 
-traverse randomGraph(10000, 5), nil
+traverse randomGraph(100, 50)
 
 # printGraph list
 
