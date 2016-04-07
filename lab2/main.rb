@@ -29,31 +29,51 @@ class Pair
     end
 end
 
-verticle_degrees = %w[]
-1.upto(verticle_count) do |e|
-    verticle_degrees.push(Pair.new(e, Random.rand(max_degeee) +1))
+def traverse current, parent, depth = 0
+    1.upto(depth) do
+        printf "  "
+    end
+    puts current.verticle
+    current.linked_with.each do |sibling|
+        if sibling == parent
+        else
+            traverse sibling, current, depth + 1
+        end
+    end
 end
-p "degrees:"
-p verticle_degrees
 
-allowed_verticles = %w[]
+
+unused_verticles = %w[]
+used_verticles = %w[]
+1.upto(verticle_count) do |e|
+    unused_verticles.push(Pair.new(e, Random.rand(max_degeee) +1))
+end
+# p "degrees:"
+# p unused_verticles
 
 # select random verticle
-verticle = verticle_degrees[Random.rand(verticle_degrees.size)]
-verticle_degrees.delete(verticle)
-p verticle_degrees
-# add to allowed its neighbor/
+verticle = unused_verticles[Random.rand(unused_verticles.size)]
+start = verticle
+unused_verticles.delete(verticle)
+used_verticles.push(verticle)
+p unused_verticles
 
-# select random verticle from allowed
-new_verticle = verticle_degrees[Random.rand(verticle_degrees.size)]
-verticle_degrees.delete(new_verticle)
-verticle.linked_with.push(new_verticle)
-new_verticle.linked_with.push(verticle)
-p verticle
-p new_verticle
-# add it into the graph
-# remove merged verticles from allowed
-# add newly linked verticles to allowed
+# add to allowed its neighbor/
+while unused_verticles.size > 0
+    # select random verticle from allowed
+    new_verticle = unused_verticles[Random.rand(unused_verticles.size)]
+
+    # add it into the graph
+    unused_verticles.delete(new_verticle)
+    verticle.linked_with.push(new_verticle)
+    new_verticle.linked_with.push(verticle)
+
+    # remove merged verticles from allowed
+    # add newly linked verticles to allowed
+    verticle = new_verticle
+end
+
+traverse start, nil, 1
 
 # printGraph list
 
