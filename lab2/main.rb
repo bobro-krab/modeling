@@ -23,6 +23,9 @@ def traverse current, parent = nil, depth = 0
     end
 end
 
+def graphWithMaxDepth verticle_count, max_depth
+    unused_verticles = %w[]
+end
 
 def randomGraph verticle_count, max_degeee
     unused_verticles = %w[]
@@ -48,9 +51,11 @@ def randomGraph verticle_count, max_degeee
         new_verticle.degree -= 1
         if verticle.degree <= 0
             useless_verticles.push(verticle)
+            used_verticles.delete(verticle)
         end
         if new_verticle.degree <= 0
             useless_verticles.push(new_verticle)
+            unused_verticles.delete(verticle)
         end
 
 
@@ -65,4 +70,4 @@ def randomGraph verticle_count, max_degeee
     return start
 end
 
-traverse randomGraph(1000, 50)
+traverse randomGraph(10, 3)
