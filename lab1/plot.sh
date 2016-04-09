@@ -11,9 +11,9 @@ set terminal png size 800,600
 set output "graph.png"
 set style data boxes
 
-set xlabel "bla"
-set ylabel "blabla"
+set xlabel ""
+set ylabel "Количество значений"
 
-plot "$1" using :1 title "Ускорение" with lines
+plot "$1" using :1 title "Гистограмма" with lines
 
 EOP
