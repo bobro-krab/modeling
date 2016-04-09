@@ -7,9 +7,10 @@
         без возвращений
 
 Полученное непрерывное распределение:
-![rasp](path "example_graph.png")
+![rasp](path "https://github.com/bobro-krab/modeling/blob/master/lab1/example_graph.png")
 
 Вывод программы:
+`
 Distributed save to 'Distributed.res' file
 FROM FILELine count is 5
 1 0.5
@@ -32,3 +33,4 @@ With returns histogram
 2489
 4961
 2550
+`
