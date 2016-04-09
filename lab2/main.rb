@@ -1,4 +1,4 @@
-
+#!/usr/bin/env ruby
 class Pair
     attr_accessor :verticle
     attr_accessor :degree
@@ -27,6 +27,7 @@ end
 def randomGraph verticle_count, max_degeee
     unused_verticles = %w[]
     used_verticles = %w[]
+    useless_verticles = %w[]
     1.upto(verticle_count) do |e|
         unused_verticles.push(Pair.new(e, Random.rand(max_degeee) +1))
     end
@@ -37,11 +38,21 @@ def randomGraph verticle_count, max_degeee
     used_verticles.push(verticle)
     start = verticle
 
-    # add to allowed its neighbor/
+    # add to allowed its neighbor
     while unused_verticles.size > 0
         # select random verticle from allowed
         verticle     = used_verticles[Random.rand(used_verticles.size)]
         new_verticle = unused_verticles[Random.rand(unused_verticles.size)]
+
+        verticle.degree -= 1
+        new_verticle.degree -= 1
+        if verticle.degree <= 0
+            useless_verticles.push(verticle)
+        end
+        if new_verticle.degree <= 0
+            useless_verticles.push(new_verticle)
+        end
+
 
         # move new verticle to used
         unused_verticles.delete(new_verticle)
@@ -54,7 +65,4 @@ def randomGraph verticle_count, max_degeee
     return start
 end
 
-traverse randomGraph(100, 50)
-
-# printGraph list
-
+traverse randomGraph(1000, 50)
