@@ -21,9 +21,24 @@ def gen_array (length, distribution)
     res
 end
 
-distrib.values.each do |first|
-    distrib.values.each do |second|
+def calculate (tau, sigma)
+    result = [-1]
+    0.upto(tau.size - 1) { |i|
+        result[i] = [result[i-1] + sigma[i-1] - tau[i], 0].max
+    }
+    result
+end
+
+distrib.each do |first_name, first|
+    distrib.each do |second_name, second|
+        if first_name == :const && second_name == :const
+            next
+        end
         tau = gen_array(10, first)
         sigma = gen_array(10, second)
+        puts "#{first_name}-#{second_name}"
+        omega = calculate(tau, sigma)
+        p omega
+        puts " "
     end
 end
