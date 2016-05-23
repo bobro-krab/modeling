@@ -1,5 +1,19 @@
 #!/usr/bin/env ruby
 
+second = \
+ [
+    [0.3, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2], \
+    [0.2, 0.3, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], \
+    [0.0, 0.2, 0.3, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], \
+    [0.0, 0.0, 0.2, 0.3, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0], \
+    [0.0, 0.0, 0.0, 0.2, 0.3, 0.5, 0.0, 0.0, 0.0, 0.0], \
+    [0.0, 0.0, 0.0, 0.0, 0.2, 0.3, 0.5, 0.0, 0.0, 0.0], \
+    [0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.3, 0.5, 0.0, 0.0], \
+    [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.3, 0.5, 0.0], \
+    [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.3, 0.5], \
+    [0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.3]  \
+  ]
+
 mat_event = \
 [
     [0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], \
@@ -31,12 +45,33 @@ def get_next arr
     temp
 end
 
-Count = 10000
-a = 0
-hist = {}
-0.upto(9) do |i| hist[i] = 0 end
-1.upto(Count) do |i|
-    a = get_next(mat_event[a])
-    hist[a] += 1
+def plot (hash, filename="temp")
+    File.open(filename, 'w') { |file|
+        hash.each { |hash, val| file.puts "#{hash}\t#{val}" }
+    }
 end
-p hist
+
+def test markov_matrix, count = 10000
+    a = 0
+    hist = {}
+    0.upto(9) do |i| hist[i] = 0 end
+    1.upto(count) do |i|
+        a = get_next(markov_matrix[a])
+        hist[a] += 1
+    end
+    p hist
+    hist
+end
+
+def megatest markov_matrix
+    hist = {}
+    0.upto(9) do |i| hist[i] = 0 end
+    1.upto(100) do |i|
+        hist[test markov_matrix] += 1
+    end
+    p "lol"
+    hist
+end
+
+plot(test(mat_event), "first")
+plot(test(second), "second")

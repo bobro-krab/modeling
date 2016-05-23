@@ -108,6 +108,6 @@ def graphWithMaxDegree verticle_count, max_degeee
 end
 
 puts "degree"
-traverse graphWithMaxDegree(10, 2)
+traverse graphWithMaxDegree(10, 3)
 puts "depth"
 traverse graphWithMaxDepth(10, 2)
